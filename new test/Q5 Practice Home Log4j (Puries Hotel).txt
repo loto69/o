@@ -1,0 +1,271 @@
+package PuriesHotel_Test;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.Duration;
+import java.util.Set;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.interactions.Actions;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.events.WebDriverListener;
+import utils.EventHandler;
+import utils.LoggerHandler;
+
+public class Test_purihotel {
+    private static final long PAGE_LOAD_TIME = 30;
+    public static WebDriver driver;
+
+    @BeforeMethod
+    public WebDriver beforeMethod() throws MalformedURLException {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        driver = new RemoteWebDriver(new URL("http://localhost:4444"), chromeOptions);
+        driver.get("https://www.puriholidayresort.com");
+        WebDriverListener listener = new EventHandler();
+        driver = new EventFiringDecorator<>(listener).decorate(driver);
+        driver.manage().window().maximize();
+        return driver;
+    }
+
+    @Test(priority=1)
+    public void test1()throws Exception
+    {
+        Thread.sleep(4000);
+        driver.findElement(By.xpath("/html/body/div[2]/div/div/div[1]")).click();
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("/html/body/section[1]/div[1]/div/div/div/form/div[1]/div[1]/input")).click();
+        Thread.sleep(3000);
+        
+        driver.findElement(By.xpath("/html/body/section[1]/div/div/div/div/form/div[1]/div[1]/input")).click();     
+        Thread.sleep(2000);
+
+        Select s1=new Select(driver.findElement(By.xpath("/html/body/div[5]/div/div/select[2]")));
+        s1.selectByIndex(0);        
+        Thread.sleep(2000);
+        
+        // driver.findElement(By.xpath(""))
+        Select s2=new Select(driver.findElement(By.xpath("/html/body/div[5]/div/div/select[1]")));
+        s2.selectByIndex(0);        
+        Thread.sleep(2000);
+        
+        
+        driver.findElement(By.xpath("/html/body/div[5]/table/tbody/tr[4]/td[5]/a")).click();     
+        Thread.sleep(2000);
+        
+        
+        driver.findElement(By.xpath("/html/body/section[1]/div/div/div/div/form/div[1]/div[2]/input")).click();
+        Thread.sleep(2000);
+        Select s3=new Select(driver.findElement(By.xpath("/html/body/div[5]/div/div/select[2]")));
+        s3.selectByIndex(0);        
+        Thread.sleep(2000);
+        Select s4=new Select(driver.findElement(By.xpath("/html/body/div[5]/div/div/select[1]")));
+        s4.selectByIndex(0);    
+        Thread.sleep(2000);
+
+        driver.findElement(By.xpath("/html/body/div[5]/table/tbody/tr[4]/td[7]/a")).click();
+        Thread.sleep(2000);
+
+        driver.findElement(By.xpath("/html/body/section[1]/div/div/div/div/form/div[2]/button")).click();
+        Thread.sleep(2000);
+
+    }
+
+    @Test(priority = 2) 
+    public void test2() throws Exception{ 
+        Thread.sleep(10000); 
+        WebElement cross = 
+driver.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/button")); 
+        cross.click(); 
+        Thread.sleep(3000); 
+ 
+        WebElement rooms = 
+driver.findElement(By.xpath("/html/body/header/div/div/div[2]/div/div[2]/div/div/div/ul/li[2]")); 
+        rooms.click(); 
+        Thread.sleep(3000); 
+         
+        WebElement roomsSelect = 
+driver.findElement(By.xpath("/html/body/header/div/div/div[2]/div/div[2]/div/div/div/ul/li[2]/ul/li[2]/a")); 
+        roomsSelect.click(); 
+        LoggerHandler.logInfo("Rooms selected"); 
+        Thread.sleep(3000); 
+         
+        JavascriptExecutor js = (JavascriptExecutor)driver; 
+        js.executeScript("window.scrollBy(0,350)",""); 
+        Thread.sleep(3000); 
+         
+        WebElement amenities = 
+driver.findElement(By.xpath("/html/body/section[2]/div/div/div/div[5]/div/section/div/h3[2]")); 
+        amenities.click(); 
+        Thread.sleep(3000); 
+         
+        js.executeScript("window.scrollBy(0,150)",""); 
+ 
+        
+if(driver.findElement(By.xpath("/html/body/section[2]/div/div/div/div[5]/div/section/div/p[2]")).getText().contains("Price")){ 
+            System.out.println("Navigated successfully"); 
+            LoggerHandler.logInfo("Successful navigation"); 
+        }else
+
+    {
+        System.out.println("Navigation unsuccessful");
+    }
+    }
+
+    @Test(priority = 3) 
+    public void test3()throws Exception{ 
+        Thread.sleep(10000); 
+        WebElement cross = 
+driver.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/button")); 
+        cross.click(); 
+        Thread.sleep(3000); 
+ 
+        WebElement about = 
+driver.findElement(By.xpath("/html/body/header/div/div/div[2]/div/div[2]/div/div/div/ul/li[1]")); 
+        about.click(); 
+        Thread.sleep(3000); 
+ 
+        WebElement lake = 
+driver.findElement(By.xpath("/html/body/header/div/div/div[2]/div/div[2]/div/div/div/ul/li[1]/ul/li[7]/a")); 
+        lake.click(); 
+        LoggerHandler.logInfo("Place selected"); 
+        Thread.sleep(3000); 
+ 
+        JavascriptExecutor js = (JavascriptExecutor)driver; 
+        js.executeScript("window.scrollBy(0,1500)",""); 
+        Thread.sleep(3000); 
+ 
+        WebElement enter = 
+driver.findElement(By.xpath("/html/body/footer/section[1]/div/div[1]/div[2]/div/div/div/div/form/div[2]/textarea")); 
+        enter.sendKeys("Excellent"); 
+        LoggerHandler.logInfo("Comment entered"); 
+        Thread.sleep(3000); 
+ 
+        WebElement click =  driver.findElement(By.xpath("//input[@value='Continue']")); 
+        click.click(); 
+        Thread.sleep(3000); 
+    }
+
+    @AfterMethod
+    public void thrash() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+}
+
+
+Dependency:
+
+
+<dependencies>
+   <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+<dependency>
+
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>5.4.1</version>
+</dependency>
+ <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.6</version>
+    </dependency>
+
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-simple</artifactId>
+    <version>2.0.7</version>
+    <scope>test</scope>
+</dependency>
+
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-java</artifactId>
+    <version>4.11.0</version>
+</dependency>
+
+ <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>5.0.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>5.0.0</version>
+    </dependency>
+   
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>2.14.1</version> <!-- Use the appropriate version -->
+    </dependency>
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.14.1</version> <!-- Use the appropriate version -->
+    </dependency>
+    <dependency>
+      <groupId>com.aventstack</groupId>
+      <artifactId>extentreports</artifactId>
+      <version>5.0.9</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.projectlombok</groupId>
+          <artifactId>lombok</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+   
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>gherkin</artifactId>
+      <version>2.12.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+    <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>7.10.2</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>1.2.5</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-core</artifactId>
+      <version>1.2.5</version>
+    </dependency>
+    <dependency>
+      <groupId>info.cukes</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>1.2.5</version>
+    </dependency>
+<dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.17</version> <!-- Replace with your Log4j version -->
+</dependency>
+  </dependencies>
